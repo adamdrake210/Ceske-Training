@@ -9,15 +9,34 @@ const styles = theme => ({
 });
 
 class Adjectives extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      wantTranslate: false
+    }
+    this.handleTranslate = this.handleTranslate.bind(this);
+  }
+
+  handleTranslate = () => {
+    this.setState({
+      wantTranslate: true
+    })
+  }
+
   render() {
     const { classes } = this.props;
+    const { adjective, translate, example} = this.props.adjective;
 
     return (
       <React.Fragment>
         <h1>Adjective</h1>
-        <Button variant="contained" color="primary" className={classes.button}>
-          Pick an Adjective
+        <h3>{adjective}</h3>
+        <Button variant="contained" color="primary" onClick={this.handleTranslate} className={classes.button}>
+          Translate
         </Button>
+        {this.state.wantTranslate &&
+          <p>{translate}</p>
+        }
       </React.Fragment>
     )
   }

@@ -9,15 +9,33 @@ const styles = theme => ({
 });
 
 class Verbs extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      wantTranslate: false
+    }
+    this.handleTranslate = this.handleTranslate.bind(this);
+  }
+
+  handleTranslate = () => {
+    this.setState({
+      wantTranslate: true
+    })
+  }
+
   render() {
     const { classes } = this.props;
-
+    const { verb, translate, infinitive, example, part } = this.props.verb;
     return (
       <React.Fragment>
         <h1>Verb</h1>
-        <Button variant="contained" color="primary" className={classes.button}>
-          Pick a Verb
+        <h3>{verb}</h3>
+        <Button variant="contained" color="primary" onClick={this.handleTranslate} className={classes.button}>
+          Translate
         </Button>
+        {this.state.wantTranslate &&
+          <p>{translate}</p>
+        }
       </React.Fragment>
     )
   }
